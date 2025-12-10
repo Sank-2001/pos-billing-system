@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import API from "../api";   // ⬅️ NEW import
 
 function Products() {
   const [products, setProducts] = useState([]);
@@ -14,12 +15,12 @@ function Products() {
   }, []);
 
   const loadProducts = async () => {
-    const res = await axios.get("http://localhost:8080/api/products");
+    const res = await axios.get(`${API}/api/products`);
     setProducts(res.data);
   };
 
   const saveProduct = async () => {
-    await axios.post("http://localhost:8080/api/products", form);
+    await axios.post(`${API}/api/products`, form);
     setForm({ name: "", price: "", quantity: "" });
     loadProducts();
   };

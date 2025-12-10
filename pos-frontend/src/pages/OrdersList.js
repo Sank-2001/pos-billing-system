@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import API from "../api";   // ⬅️ NEW import
 
 function OrdersList() {
   const [orders, setOrders] = useState([]);
@@ -11,7 +12,7 @@ function OrdersList() {
 
   const loadOrders = async () => {
     try {
-      const res = await axios.get("http://localhost:8080/api/orders");
+      const res = await axios.get(`${API}/api/orders`);
       setOrders(res.data);
     } catch (err) {
       console.error("Error loading orders:", err);
@@ -22,7 +23,11 @@ function OrdersList() {
     <div style={{ padding: "20px" }}>
       <h2>All Invoices</h2>
 
-      <table border="1" cellPadding="10" style={{ width: "60%", marginTop: "20px" }}>
+      <table
+        border="1"
+        cellPadding="10"
+        style={{ width: "60%", marginTop: "20px" }}
+      >
         <thead>
           <tr>
             <th>ID</th>
